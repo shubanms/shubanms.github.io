@@ -315,6 +315,16 @@ p {
 }
 /* End About Section */
 
+/* Code Section */
+#code {
+	flex-direction: column-reverse;
+	text-align: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 100px 20px;
+}
+/* End Code Section */
+
 /* Footer */
 #footer {
 	background-color: rgb(61, 56, 114);
