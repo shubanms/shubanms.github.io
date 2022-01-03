@@ -211,7 +211,7 @@ p {
 
 /* Hero Section */
 #hero {
-	background-image: url(images/flappy_bird.jpg);
+	background-image: url(images/Sudoku.jpg);
 	background-size: cover;
 	background-position: top center;
 	position: relative;
@@ -296,9 +296,8 @@ p {
 	letter-spacing: 0.2rem;
 	margin-bottom: 10px;
 }
-#about .col-left p {
+#about .col-right p {
 	margin-bottom: 20px;
-	font-size: large;
 }
 #about .col-right .cta {
 	color: rgb(255, 255, 255);
@@ -325,6 +324,39 @@ p {
 	padding: 100px 20px;
 }
 /* End Code Section */
+
+/* Play Section */
+#code {
+	flex-direction: column-reverse;
+	text-align: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 100px 20px;
+}
+#play .col-left p{
+    margin-bottom: 20px;
+	font-size: large;
+    text-align: center;
+}
+.playbutton {
+	display: inline-block;
+	padding: 10px 200px;
+	color: rgb(255, 255, 255);
+	background-color: transparent;
+	border: 2px solid #2C394B;
+	font-size: 2rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	margin-top: 30px;
+	transition: 0.3s ease;
+	transition-property: background-color, color;
+    
+}
+.playbutton:hover {
+	color: white;
+	background-color: rgb(133, 133, 133);
+}
+/* End Play Section */
 
 /* Footer */
 #footer {
