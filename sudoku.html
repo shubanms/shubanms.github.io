@@ -7,8 +7,55 @@
     <link rel="stylesheet" href="sudoku.css">
     <link rel="icon" type="image/icon" href="https://img.icons8.com/dusk/50/000000/sudoku.png">
     <title>Sudoku</title>
+
 </head>
+
+<header>
+    <h1>Sudoku</h1>
+    <div id="game">
+        <div id="mode">
+            <h2>Game Mode:</h2>
+            <label><input id="mode-1" type="radio" name="mode" value="easy" checked>Easy</label>
+            <label><input id="mode-2" type="radio" name="mode" value="medium">Medium</label>
+            <label><input id="mode-3" type="radio" name="mode" value="hard">Hard</label>
+            <label><input id="mode-4" type="radio" name="mode" value="extreme">Extreme</label>
+        </div>
+
+        <div id="time">
+            <h2>Time:</h2>
+            <label><input id="time-1" type="radio" name="time" value="five" checked>5 Min</label>
+            <label><input id="time-2" type="radio" name="time" value="ten">10 Min</label>
+            <label><input id="time-3" type="radio" name="time" value="fifteen">15 Min</label>
+            <label><input id="time-4" type="radio" name="time" value="thirty">30 Min</label>
+        </div>
+
+        <div id="theme">
+            <h2>Theme:</h2>
+            <label><input id="theme-1" type="radio" name="theme" value="dark" checked>Dark</label>
+            <label><input id="theme-2" type="radio" name="theme" value="light">Light</label>
+        </div>
+    </div>
+    <button id="button">New Game</button>
+</header>
+
 <body>
-    
+    <div id="status">
+        <p id="timer"></p>
+    </div>
+    <div id="gamemain">
+        <div id="board"></div>
+        <div id="numbers" class="hidden">
+            <p id="one">1</p>
+            <p id="two">2</p>
+            <p id="three">3</p>
+            <p id="four">4</p>
+            <p id="five">5</p>
+            <p id="six">6</p>
+            <p id="seven">7</p>
+            <p id="eight">8</p>
+            <p id="nine">9</p>
+        </div>
+        </div>
+    </div>
 </body>
 </html>

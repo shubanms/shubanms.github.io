@@ -1,0 +1,44 @@
+/* Header */
+header{
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(0, 81, 255);
+}
+h1{
+    font-size: 45pt;
+}
+
+#game{
+    display: flex;
+    justify-content: center;
+}
+#game > *{
+    margin-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#game .h2{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.label{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+button{
+    justify-self: center;
+}
+/* End Header */
+
+/* Body */
+body.dark{
+    background-color: black;
+    color: white;
+}
+/*End Body*/
+
