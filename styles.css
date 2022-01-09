@@ -441,7 +441,7 @@ p {
 
 /* Footer */
 #footer {
-	background-color: rgb(61, 56, 114);
+	background-color: rgba(61, 56, 114, 0.726);
 }
 #footer .footer {
 	min-height: 200px;
@@ -479,6 +479,7 @@ p {
 }
 #footer .brand h1{
 	color: white;
+	text-transform: none;
 }
 /* End Footer */
 
