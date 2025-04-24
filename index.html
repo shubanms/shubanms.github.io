@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Shuban M S</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="container-fluid py-3 d-flex justify-content-between align-items-center px-4">
+    <div class="d-flex align-items-center">
+      <a href="/" class="fs-4 fw-bold text-decoration-none" style="color: #0dcaf0">Shuban M S</a>
+    </div>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+        <li class="nav-item"><a href="#achievements" class="nav-link">Achievements</a></li>
+      </ul>
+    </nav>
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode" style="margin-left: 32px; font-size: 1.6rem; background: none; border: none; cursor: pointer;"></button>
+  </header>
+
+  <section class="hero d-flex flex-column justify-content-center align-items-center px-4">
+    <div class="text-content py-5" data-aos="fade-up">
+      <h1 class="display-4 fw-bold">Hello, I am <span class="text-primary">Shuban.</span></h1>
+      <div class="typed-intro mt-3 fs-5 text-dark" data-aos="fade-up" data-aos-delay="200">
+        I am a <span id="typed-text" class="text-dark fw-bold"></span>
+      </div>
+      <a href="assets/Shuban_M_S_Resume.pdf" target="_blank" class="btn btn-outline-dark mt-4" data-aos="fade-up" data-aos-delay="400">My Resume</a>
+      <div class="social-icons" data-aos="fade-up" data-aos-delay="600">
+        <a href="https://github.com/shubanms" target="_blank" class="github"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/shubanms" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:msshuban4@gmail.com" class="email"><i class="fas fa-envelope"></i></a>
+        <a href="https://leetcode.com/u/msshuban4/" target="_blank" class="leetcode"><i class="fa-solid fa-code"></i></a>
+        <a href="https://www.kaggle.com/shubanms" target="_blank" class="kaggle"><i class="fab fa-kaggle"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container text-center">
+    <section id="about" class="my-5" data-aos="fade-up">
+      <h2>About Me</h2>
+      <p class="text-start mx-auto" style="max-width: 800px;">
+        I am a final-year Computer Engineering student at VIT Chennai with a deep passion for AI, machine learning, and data science. With three years of hands-on experience in data analytics and deep learning projects, I've developed a strong foundation in Python development and published research in IEEE and Springer journals. My expertise spans across Python, MySQL, PostgreSQL, and Azure cloud services, with a particular focus on Deep Learning and Generative AI applications.
+        <br><br>
+        I have a strong research background and am quick to learn and implement new technologies, which allows me to adapt rapidly to emerging trends in the field.
+      </p>
+      <p class="text-start mx-auto" style="max-width: 800px;">
+        As a Data Scientist and AI Engineer, I've demonstrated my capabilities by reaching the finals in three National Hackathons and one International Hackathon. I thrive on solving complex problems and am constantly exploring new developments in AI technology. As I approach graduation, I'm eager to take on new challenges and contribute to innovative projects in the field of artificial intelligence.
+        <br><br>
+        My ability to quickly grasp new concepts and apply them effectively has been key to my success in both research and practical projects.
+      </p>
+    </section>
+
+    <section id="skills" class="my-5" data-aos="fade-up">
+      <h2>My Skills</h2>
+      <h4 class="mt-4">Tech Stack</h4>
+      <div class="skills-icons d-flex flex-wrap justify-content-center gap-4 mb-5">
+        <div class="skill-icon-3d" data-tooltip="Python">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="SQL">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="PostgreSQL">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Redis">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Pandas">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="NumPy">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Scikit-learn">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="Scikit-learn" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="TensorFlow">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="PyTorch">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Jupyter">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter" />
+        </div>
+      </div>
+      <h4 class="mt-4">Technologies and Frameworks</h4>
+      <div class="skills-icons d-flex flex-wrap justify-content-center gap-4">
+        <div class="skill-icon-3d" data-tooltip="FastAPI">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Docker">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Git">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="GitHub">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="Azure">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="VS Code">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" />
+        </div>
+        <div class="skill-icon-3d" data-tooltip="LangChain">
+          <img src="https://raw.githubusercontent.com/hwchase17/langchain/master/docs/static/img/favicon.ico" alt="LangChain" />
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="my-5">
+      <h2 data-aos="fade-up">Projects</h2>
+      <div id="projects-container" class="d-flex flex-wrap justify-content-center"></div>
+    </section>
+    
+    <!-- Achievements Section -->
+    <section id="achievements" class="my-5" data-aos="fade-up">
+      <h2 class="center-heading">Achievements</h2>
+      <div class="achievements-cards d-flex flex-wrap justify-content-center gap-4 text-center">
+        <div class="achievement-card">
+          <h5>Hackathon Finalist</h5>
+          <p>Finalist in 3 National Hackathons and 1 International Hackathon.</p>
+        </div>
+        <div class="achievement-card">
+          <h5>Patent</h5>
+          <p>Submitted a patent on a Generative AI learning system with Blockchain integration.</p>
+        </div>
+        <div class="achievement-card">
+          <h5>Speaker</h5>
+          <p>Conducted a session on Azure Fundamentals and Deploying Machine Learning Models on Azure.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Research Papers Section with Two-Column Layout -->
+    <section id="research-papers" class="my-5" data-aos="fade-up">
+      <h2 class="center-heading mb-4">Research Papers</h2>
+      <div class="research-papers-row">
+        <div id="paper-row" class="d-flex flex-wrap justify-content-center gap-3">
+          <!-- Paper cards will be injected by JS -->
+        </div>
+      </div>
+      <div class="research-paper-details-row">
+        <div id="paper-abstract">
+          <h4>FALCONNet: A Multi-Defense Approach for Securing Few-Shot Learning Against Adversarial Attacks</h4>
+          <p class="paper-abstract-text">This paper compares few-shot learning models—Siamese, Prototypical Networks, and our proposed FalconNet—on the Omniglot dataset. We assess their robustness against adversarial attacks (PGD, FGSM) and test defense strategies like adversarial training and defensive distillation. FalconNet, with these defenses, outperforms the other models in accuracy and stability under attack.</p>
+        </div>
+        <div id="paper-pdf">
+          <iframe src="assets/FALCONNet.pdf" title="Research Paper PDF" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact" class="my-5" data-aos="fade-up">
+      <h2 class="center-heading">Contact</h2>
+      <p>Email: <a href="mailto:msshuban4@gmail.com">msshuban4@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/shubanms/">linkedin.com/shubanms</a></p>
+      <p>GitHub: <a href="https://github.com/shubanms">github.com/shubanms</a></p>
+    </section>
+  </main>
+
+  <footer class="text-center py-3">
+    <p>&copy; 2025 Shuban M S. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="script.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
