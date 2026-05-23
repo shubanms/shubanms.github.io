@@ -1,0 +1,24 @@
+---
+import { education } from "../data/content";
+---
+
+<section id="education" class="mx-auto max-w-5xl px-5 py-12 sm:px-8">
+  {
+    education.map((ed) => (
+      <div class="reveal rounded-2xl border border-border bg-surface p-7 sm:p-9">
+        <p class="font-mono text-sm font-medium uppercase tracking-widest text-accent">
+          Education
+        </p>
+        <div class="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3 class="font-display text-xl font-semibold text-fg">{ed.school}</h3>
+          <span class="font-mono text-sm text-muted">{ed.period}</span>
+        </div>
+        <p class="mt-1 text-[15px] text-fg">{ed.degree}</p>
+        <p class="mt-1 text-sm text-muted">{ed.detail}</p>
+        <p class="mt-4 text-sm leading-relaxed text-muted">
+          <span class="font-medium text-fg">Coursework:</span> {ed.coursework}
+        </p>
+      </div>
+    ))
+  }
+</section>

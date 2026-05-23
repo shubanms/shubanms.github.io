@@ -1,0 +1,120 @@
+---
+import { profile } from "../data/content";
+
+const socials = [
+  { href: profile.socials.github, label: "GitHub", path: "M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0022 12c0-5.52-4.48-10-10-10z" },
+  { href: profile.socials.linkedin, label: "LinkedIn", path: "M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.34V10.5H6.06v6.84h2.28zM7.2 9.5a1.32 1.32 0 100-2.64 1.32 1.32 0 000 2.64zm10.14 7.84v-3.75c0-2-.43-3.54-2.77-3.54-1.12 0-1.88.62-2.19 1.2h-.03V10.5H10.2v6.84h2.28v-3.39c0-.9.17-1.76 1.28-1.76 1.09 0 1.1 1.02 1.1 1.82v3.33h2.28z" },
+  { href: `mailto:${profile.email}`, label: "Email", path: "M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v.01L12 13l8-6.99V6H4zm16 2.24l-7.34 6.42a1 1 0 01-1.32 0L4 8.24V18h16V8.24z" },
+  { href: profile.socials.leetcode, label: "LeetCode", path: "M16.1 3.4l-7.4 7.4a2.1 2.1 0 000 3l7.4 7.4a1.4 1.4 0 11-2 2l-7.4-7.4a4.9 4.9 0 010-7l7.4-7.4a1.4 1.4 0 012 2zM21 12.5a1.4 1.4 0 01-1.4 1.4h-8a1.4 1.4 0 110-2.8h8A1.4 1.4 0 0121 12.5z" },
+  { href: profile.socials.kaggle, label: "Kaggle", path: "M9.4 3v11.2l5-5.3h2.9l-5.2 5.3 5.4 6.8h-2.9l-4-5.2-1.2 1.2V21H7V3h2.4z" },
+];
+---
+
+<section
+  id="top"
+  class="relative flex min-h-[92vh] items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
+>
+  <!-- ambient accent glow -->
+  <div
+    class="blob pointer-events-none absolute -top-40 right-0 h-[34rem] w-[34rem] rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(circle, var(--accent-soft), transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto w-full max-w-5xl">
+    <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm font-medium text-muted">
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+      </span>
+      {profile.location}
+    </p>
+
+    <h1
+      class="reveal font-display text-5xl font-bold leading-[1.05] tracking-tight text-fg sm:text-7xl"
+      style="transition-delay: 60ms;"
+    >
+      Hi, I'm Shuban.
+    </h1>
+
+    <p
+      class="reveal mt-5 max-w-2xl font-display text-2xl font-medium text-muted sm:text-3xl"
+      style="transition-delay: 120ms;"
+    >
+      I'm a&nbsp;<span id="typed" class="caret text-fg"></span>
+    </p>
+
+    <p
+      class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted"
+      style="transition-delay: 180ms;"
+    >
+      I build reliable AI-driven systems and data pipelines — turning ambiguous
+      problems into production software that teams can trust.
+    </p>
+
+    <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="transition-delay: 240ms;">
+      <a
+        href="#projects"
+        class="rounded-full bg-fg px-6 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+      >
+        View my work
+      </a>
+      <a
+        href={profile.resume}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full border border-border px-6 py-3 text-sm font-semibold text-fg transition-colors hover:border-accent hover:text-accent"
+      >
+        Download résumé
+      </a>
+    </div>
+
+    <div class="reveal mt-10 flex items-center gap-5" style="transition-delay: 300ms;">
+      {
+        socials.map((s) => (
+          <a
+            href={s.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={s.label}
+            class="text-muted transition-colors hover:text-accent"
+          >
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d={s.path} /></svg>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { profile } from "../data/content";
+
+  const el = document.getElementById("typed");
+  if (el) {
+    const words = profile.roles;
+    let w = 0,
+      c = 0,
+      deleting = false;
+
+    const tick = () => {
+      const word = words[w];
+      el.textContent = deleting
+        ? word.slice(0, c--)
+        : word.slice(0, c++);
+
+      let delay = deleting ? 45 : 90;
+      if (!deleting && c === word.length + 1) {
+        deleting = true;
+        delay = 1400;
+      } else if (deleting && c === 0) {
+        deleting = false;
+        w = (w + 1) % words.length;
+        delay = 350;
+      }
+      setTimeout(tick, delay);
+    };
+    tick();
+  }
+</script>
