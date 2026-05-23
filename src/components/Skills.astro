@@ -1,0 +1,43 @@
+---
+import { skillGroups } from "../data/content";
+---
+
+<section id="skills" class="mx-auto max-w-5xl px-5 py-24 sm:px-8">
+  <div class="reveal mb-14">
+    <p class="font-mono text-sm font-medium uppercase tracking-widest text-accent">
+      03 — Skills
+    </p>
+    <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">
+      Tools I reach for.
+    </h2>
+  </div>
+
+  <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
+    {
+      skillGroups.map((group, gi) => (
+        <div class="reveal bg-surface p-7" style={`transition-delay: ${gi * 80}ms;`}>
+          <h3 class="mb-6 text-sm font-semibold uppercase tracking-widest text-muted">
+            {group.label}
+          </h3>
+          <ul class="flex flex-wrap gap-x-5 gap-y-6">
+            {group.items.map((item) => (
+              <li class="group flex flex-col items-center gap-2">
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  loading="lazy"
+                  width="36"
+                  height="36"
+                  class="h-9 w-9 grayscale transition-all duration-300 group-hover:grayscale-0"
+                />
+                <span class="text-xs text-muted transition-colors group-hover:text-fg">
+                  {item.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>

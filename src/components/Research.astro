@@ -1,0 +1,77 @@
+---
+import { papers } from "../data/content";
+---
+
+<section id="research" class="mx-auto max-w-5xl px-5 py-24 sm:px-8">
+  <div class="reveal mb-14">
+    <p class="font-mono text-sm font-medium uppercase tracking-widest text-accent">
+      05 — Research
+    </p>
+    <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">
+      Published papers.
+    </h2>
+  </div>
+
+  <div class="reveal grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+    <!-- Paper list -->
+    <div class="flex flex-col gap-3" id="paper-list">
+      {
+        papers.map((p, i) => (
+          <button
+            type="button"
+            class="paper-tab w-full rounded-xl border border-border bg-surface p-4 text-left transition-all duration-200 hover:border-accent data-[active=true]:border-accent data-[active=true]:bg-accent-soft"
+            data-index={i}
+            data-active={i === 0 ? "true" : "false"}
+          >
+            <span class="font-mono text-xs text-accent">Paper {String(i + 1).padStart(2, "0")}</span>
+            <span class="mt-1.5 block text-sm font-medium leading-snug text-fg">
+              {p.title}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Detail panel -->
+    <div class="flex flex-col rounded-2xl border border-border bg-surface p-6">
+      <h3 id="paper-title" class="font-display text-lg font-semibold leading-snug text-fg">
+        {papers[0].title}
+      </h3>
+      <p id="paper-abstract" class="mt-3 text-sm leading-relaxed text-muted">
+        {papers[0].abstract}
+      </p>
+      <a
+        id="paper-link"
+        href={papers[0].pdf}
+        target="_blank"
+        rel="noopener"
+        class="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-fg transition-colors hover:border-accent hover:text-accent"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+        Open full paper (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { papers } from "../data/content";
+
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".paper-tab");
+  const titleEl = document.getElementById("paper-title");
+  const abstractEl = document.getElementById("paper-abstract");
+  const linkEl = document.getElementById("paper-link") as HTMLAnchorElement | null;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const idx = Number(tab.dataset.index);
+      const paper = papers[idx];
+      if (!paper) return;
+      tabs.forEach((t) => (t.dataset.active = "false"));
+      tab.dataset.active = "true";
+      if (titleEl) titleEl.textContent = paper.title;
+      if (abstractEl) abstractEl.textContent = paper.abstract;
+      if (linkEl) linkEl.href = paper.pdf;
+    });
+  });
+</script>

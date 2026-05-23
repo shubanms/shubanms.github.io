@@ -1,0 +1,46 @@
+---
+import { experience } from "../data/content";
+---
+
+<section id="experience" class="mx-auto max-w-5xl px-5 py-24 sm:px-8">
+  <div class="reveal mb-14">
+    <p class="font-mono text-sm font-medium uppercase tracking-widest text-accent">
+      02 — Experience
+    </p>
+    <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">
+      Where I've built things.
+    </h2>
+  </div>
+
+  <ol class="relative border-l border-border">
+    {
+      experience.map((job, i) => (
+        <li class="reveal mb-12 ml-6 last:mb-0" style={`transition-delay: ${i * 80}ms;`}>
+          <span class="absolute -left-[7px] mt-1.5 flex h-3.5 w-3.5 items-center justify-center">
+            <span class={`h-3.5 w-3.5 rounded-full border-2 border-bg ${job.current ? "bg-accent" : "bg-muted"}`} />
+          </span>
+
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 class="font-display text-xl font-semibold text-fg">
+              {job.role}
+              <span class="text-accent"> · {job.company}</span>
+            </h3>
+            <span class="font-mono text-sm text-muted">{job.period}</span>
+          </div>
+          <p class="mt-1 text-sm text-muted">
+            {job.type} · {job.location}
+          </p>
+
+          <ul class="mt-4 space-y-2.5">
+            {job.points.map((pt) => (
+              <li class="flex gap-3 text-[15px] leading-relaxed text-muted">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/70" />
+                <span>{pt}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+</section>

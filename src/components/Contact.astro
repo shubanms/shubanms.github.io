@@ -1,0 +1,46 @@
+---
+import { profile } from "../data/content";
+
+const items = [
+  { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  { label: "LinkedIn", value: "linkedin.com/in/shubanms", href: profile.socials.linkedin },
+  { label: "GitHub", value: "github.com/shubanms", href: profile.socials.github },
+];
+---
+
+<section id="contact" class="mx-auto max-w-5xl px-5 py-24 sm:px-8">
+  <div class="reveal overflow-hidden rounded-3xl border border-border bg-surface p-9 text-center sm:p-14">
+    <p class="font-mono text-sm font-medium uppercase tracking-widest text-accent">
+      06 — Contact
+    </p>
+    <h2 class="mx-auto mt-4 max-w-2xl font-display text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+      Let's build something worth building.
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-lg text-muted">
+      I'm always open to interesting problems in applied AI, GenAI, and data
+      engineering. Reach out — I'd love to talk.
+    </p>
+
+    <a
+      href={`mailto:${profile.email}`}
+      class="mt-9 inline-flex rounded-full bg-fg px-7 py-3.5 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+    >
+      Say hello
+    </a>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-border pt-8 text-sm">
+      {
+        items.map((it) => (
+          <a
+            href={it.href}
+            target="_blank"
+            rel="noopener"
+            class="text-muted transition-colors hover:text-accent"
+          >
+            <span class="font-semibold text-fg">{it.label}:</span> {it.value}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

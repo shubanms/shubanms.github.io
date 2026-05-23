@@ -1,0 +1,79 @@
+---
+import { profile } from "../data/content";
+
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
+  { href: "#projects", label: "Projects" },
+  { href: "#research", label: "Research" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300"
+  id="site-header"
+>
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4 sm:px-8">
+    <a
+      href="#top"
+      class="font-display text-lg font-bold tracking-tight text-fg"
+    >
+      Shuban<span class="text-accent">.</span>
+    </a>
+
+    <nav class="hidden items-center gap-7 md:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class="text-sm font-medium text-muted transition-colors hover:text-fg"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={profile.resume}
+        target="_blank"
+        rel="noopener"
+        class="hidden rounded-full border border-border px-4 py-1.5 text-sm font-medium text-fg transition-colors hover:border-accent hover:text-accent sm:inline-block"
+      >
+        Resume
+      </a>
+      <button
+        id="theme-toggle"
+        aria-label="Toggle theme"
+        class="grid h-9 w-9 place-items-center rounded-full border border-border text-fg transition-colors hover:border-accent hover:text-accent"
+      >
+        <svg class="h-4 w-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="hidden h-4 w-4 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const toggle = document.getElementById("theme-toggle");
+  toggle?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch (e) {}
+  });
+
+  const header = document.getElementById("site-header");
+  const onScroll = () => {
+    if (window.scrollY > 16) {
+      header?.classList.add("backdrop-blur-md", "bg-bg/80", "border-border");
+    } else {
+      header?.classList.remove("backdrop-blur-md", "bg-bg/80", "border-border");
+    }
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>
