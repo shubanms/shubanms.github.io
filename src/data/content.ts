@@ -1,15 +1,18 @@
+// TODO: replace public/assets/Shuban_M_S_Resume.pdf with the updated CV (user will provide).
+
 export const profile = {
   name: "Shuban M S",
-  tagline: "Data Scientist & AI Engineer",
+  tagline: "AI Engineer & SDE-1",
   location: "Greater Bengaluru Area, India",
   headline:
-    "AI Engineer & SDE-1 @ CGI. Designing GenAI, RAG & agentic AI systems. Ex-Founding Engineer @ GreenStitch. 2 Patents. IEEE & Springer Researcher.",
+    "AI Engineer & SDE-1 @ CGI. Building agentic AI systems, distributed observability, and AI evaluation tooling. 2 Patents. IEEE & Springer Researcher.",
+  bio:
+    "I build agentic AI systems and observability infrastructure — from LangGraph pipelines to distributed tracing across Azure microservices.",
   roles: [
     "AI Engineer",
-    "Data Scientist",
-    "GenAI & RAG Specialist",
-    "Python Engineer",
-    "Problem Solver",
+    "Agentic Systems Builder",
+    "Observability Engineer",
+    "LLM Evaluation Researcher",
   ],
   resume: "/assets/Shuban_M_S_Resume.pdf",
   email: "msshuban4@gmail.com",
@@ -56,9 +59,11 @@ export const experience: Experience[] = [
     location: "Bangalore, India · On-site",
     current: true,
     points: [
-      "Built a multi-agent OCR pipeline bridging unstructured documents to structured data, achieving ~97% extraction accuracy — a 93% improvement over traditional OCR — with human-in-the-loop escalation limited to ~4% of cases.",
-      "Reduced document processing costs by ~80% by replacing Vision LLMs with an optimized agentic architecture, processing 500-page documents in ~1.5 hours at ~$1 per document using cloud models.",
-      "Developed an intelligent document search and retrieval system surpassing baseline RAG approaches, validated with strong retrieval and grounding metrics.",
+      "Designed a multi-stage LangGraph agentic pipeline (5 agents: Manager, OCR, Reviewer, Enhancer, Review-2) for automated medical document processing on Azure, achieving ~97% extraction accuracy — a 93% improvement over traditional OCR.",
+      "Reduced document processing costs ~80% by replacing Vision LLMs with an optimized agentic architecture; processes 500-page documents in ~1.5 hours at ~$1/document.",
+      "Engineered a cross-service distributed observability framework using OpenTelemetry, Jaeger, Prometheus, and Grafana — implemented end-to-end trace propagation across Azure Service Bus boundaries and ProcessPoolExecutor workers, with custom dashboards tracking LLM token usage per agent, OCR throughput, and queue depth.",
+      "Architected RECON (Real-world Evaluation, Compliance & Observability Network), an internal AI evaluation platform covering RAG, Agent, and LLM evaluation modules with an EU AI Act compliance reporting layer; submitted to CGI FY2026 Innovation Survey.",
+      "Built a black-box RAG validation pipeline for medical APS documents using 5 QGen agents (factual, inferential, adversarial, negation, multi-hop) and domain-specific BioClinical ModernBERT embeddings.",
     ],
   },
   {
@@ -99,7 +104,8 @@ export const education = [
   },
 ];
 
-export type SkillGroup = { label: string; items: { name: string; icon: string }[] };
+export type SkillItem = { name: string; icon?: string };
+export type SkillGroup = { label: string; items: SkillItem[] };
 
 const devicon = (slug: string) =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}.svg`;
@@ -132,9 +138,17 @@ export const skillGroups: SkillGroup[] = [
       { name: "FastAPI", icon: devicon("fastapi/fastapi-original") },
       { name: "Docker", icon: devicon("docker/docker-original") },
       { name: "Azure", icon: devicon("azure/azure-original") },
+      { name: "Prometheus", icon: devicon("prometheus/prometheus-original") },
+      { name: "Grafana", icon: devicon("grafana/grafana-original") },
       { name: "Git", icon: devicon("git/git-original") },
       { name: "GitHub", icon: devicon("github/github-original") },
       { name: "VS Code", icon: devicon("vscode/vscode-original") },
+      { name: "LangGraph" },
+      { name: "LangChain" },
+      { name: "OpenTelemetry" },
+      { name: "Jaeger" },
+      { name: "Azure Service Bus" },
+      { name: "Azure Blob Storage" },
     ],
   },
 ];
@@ -143,11 +157,26 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  github: string;
+  github?: string;
   demo?: string;
+  status?: "In Development" | "Internal";
 };
 
 export const projects: Project[] = [
+  {
+    title: "RECON",
+    description:
+      "An internal AI evaluation platform covering RAG, Agent, LLM, Summarization, and Code Generation evaluation — with a compliance layer mapped to EU AI Act articles and ISO 42001 clauses. One-line agent instrumentation via OpenInference + OpenTelemetry across LangGraph, CrewAI, and AutoGen.",
+    tags: ["Python", "FastAPI", "OpenTelemetry", "OpenInference", "LangGraph", "RAG"],
+    status: "In Development",
+  },
+  {
+    title: "APS RAG Validation Framework",
+    description:
+      "A black-box RAG evaluation pipeline for Attending Physician Statement medical documents — 5 question generation agents (factual, inferential, adversarial, negation, multi-hop), 6 evaluation agents, BioClinical ModernBERT embeddings, and a live results heatmap frontend.",
+    tags: ["Python", "RAG", "BioClinical ModernBERT", "Ollama", "GPT", "FastAPI"],
+    status: "Internal",
+  },
   {
     title: "Catalyst",
     description:
@@ -189,7 +218,7 @@ export const projects: Project[] = [
 export const achievements = [
   {
     title: "2 Patents Filed",
-    body: "Filed patents including a Generative AI learning system with blockchain integration.",
+    body: "IN 202541016033 (GenAI + Blockchain Learning System, Feb 2025) and IN 202541065615 (Color-Dot Authentication System, Jul 2025) — Vellore Institute of Technology, Chennai.",
   },
   {
     title: "Best Paper Award — IEEE",

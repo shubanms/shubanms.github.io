@@ -23,12 +23,13 @@ const links = [
       Shuban<span class="text-accent">.</span>
     </a>
 
-    <nav class="hidden items-center gap-7 md:flex">
+    <nav class="hidden items-center gap-7 md:flex" aria-label="Primary">
       {
         links.map((l) => (
           <a
             href={l.href}
-            class="text-sm font-medium text-muted transition-colors hover:text-fg"
+            class="nav-link text-sm font-medium text-muted transition-colors hover:text-fg"
+            data-section={l.href.slice(1)}
           >
             {l.label}
           </a>
@@ -43,7 +44,7 @@ const links = [
         rel="noopener"
         class="hidden rounded-full border border-border px-4 py-1.5 text-sm font-medium text-fg transition-colors hover:border-accent hover:text-accent sm:inline-block"
       >
-        Resume
+        Résumé
       </a>
       <button
         id="theme-toggle"
@@ -53,19 +54,61 @@ const links = [
         <svg class="h-4 w-4 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <svg class="hidden h-4 w-4 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
       </button>
+      <button
+        id="menu-toggle"
+        aria-label="Open menu"
+        aria-controls="mobile-sheet"
+        aria-expanded="false"
+        class="grid h-9 w-9 place-items-center rounded-full border border-border text-fg transition-colors hover:border-accent hover:text-accent md:hidden"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
 </header>
 
+<!-- Mobile sheet -->
+<div
+  id="mobile-sheet"
+  class="sheet-backdrop fixed inset-0 z-40 hidden flex-col items-center justify-center gap-6 px-6 text-center md:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+>
+  <nav class="flex flex-col items-center gap-5" aria-label="Mobile">
+    {
+      links.map((l) => (
+        <a
+          href={l.href}
+          data-mobile-link
+          class="font-display text-3xl font-semibold tracking-tight text-fg transition-colors hover:text-accent"
+        >
+          {l.label}
+        </a>
+      ))
+    }
+  </nav>
+  <a
+    href={profile.resume}
+    target="_blank"
+    rel="noopener"
+    class="mt-2 rounded-full border border-border px-5 py-2 text-sm font-medium text-fg transition-colors hover:border-accent hover:text-accent"
+  >
+    Résumé
+  </a>
+</div>
+
 <script is:inline>
-  const toggle = document.getElementById("theme-toggle");
-  toggle?.addEventListener("click", () => {
+  // Theme toggle
+  const themeToggle = document.getElementById("theme-toggle");
+  themeToggle?.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
     try {
       localStorage.setItem("theme", isDark ? "dark" : "light");
     } catch (e) {}
   });
 
+  // Header blur on scroll
   const header = document.getElementById("site-header");
   const onScroll = () => {
     if (window.scrollY > 16) {
@@ -76,4 +119,54 @@ const links = [
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Mobile sheet
+  const menuToggle = document.getElementById("menu-toggle");
+  const sheet = document.getElementById("mobile-sheet");
+  const openSheet = () => {
+    sheet?.classList.remove("hidden");
+    sheet?.classList.add("flex");
+    menuToggle?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  };
+  const closeSheet = () => {
+    sheet?.classList.add("hidden");
+    sheet?.classList.remove("flex");
+    menuToggle?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  };
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = sheet?.classList.contains("flex");
+    isOpen ? closeSheet() : openSheet();
+  });
+  document.querySelectorAll("[data-mobile-link]").forEach((a) => {
+    a.addEventListener("click", closeSheet);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSheet();
+  });
+
+  // Active nav link based on visible section
+  const navLinks = Array.from(document.querySelectorAll(".nav-link[data-section]"));
+  const sections = navLinks
+    .map((l) => document.getElementById(l.getAttribute("data-section") || ""))
+    .filter(Boolean);
+
+  if (sections.length && "IntersectionObserver" in window) {
+    const setActive = (id) => {
+      navLinks.forEach((l) => {
+        l.setAttribute("data-active", l.getAttribute("data-section") === id ? "true" : "false");
+      });
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach((s) => s && io.observe(s));
+  }
 </script>

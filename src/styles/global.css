@@ -23,6 +23,9 @@
   --border: #e7e7e4;
   --accent: #0e8a9e;
   --accent-soft: rgba(14, 138, 158, 0.1);
+
+  /* grid pattern derived from border */
+  --grid-line: rgba(10, 10, 11, 0.07);
 }
 
 .dark {
@@ -33,6 +36,7 @@
   --border: #1f2225;
   --accent: #2dd4e8;
   --accent-soft: rgba(45, 212, 232, 0.12);
+  --grid-line: rgba(243, 244, 245, 0.06);
 }
 
 html {
@@ -52,6 +56,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -59,7 +64,31 @@ body {
   color: #fff;
 }
 
-/* Scroll-reveal animation */
+/* --- Scroll progress bar (top) --- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 60;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px var(--accent);
+  pointer-events: none;
+}
+
+/* --- Subtle hero grid background --- */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 35%, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 35%, transparent 75%);
+}
+
+/* --- Scroll reveal --- */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -81,7 +110,7 @@ body {
   }
 }
 
-/* Animated hero gradient blob */
+/* --- Floating accent orb that follows cursor in hero --- */
 @keyframes float-slow {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(2%, -3%) scale(1.05); }
@@ -89,9 +118,10 @@ body {
 
 .blob {
   animation: float-slow 14s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Typed caret */
+/* --- Typed caret --- */
 .caret::after {
   content: "";
   display: inline-block;
@@ -106,4 +136,91 @@ body {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* --- 3D tilt cards --- */
+.tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.tilt > * {
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transition: none;
+  }
+}
+
+/* --- Magnetic button micro-interaction --- */
+.magnet {
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnet {
+    transition: none;
+  }
+}
+
+/* --- Active nav link indicator --- */
+.nav-link {
+  position: relative;
+}
+
+.nav-link[data-active="true"] {
+  color: var(--fg);
+}
+
+.nav-link[data-active="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  height: 2px;
+  width: 16px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* --- Mobile sheet --- */
+.sheet-backdrop {
+  background: color-mix(in oklab, var(--bg) 78%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- Skill chip --- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--surface);
+  font-size: 0.8125rem;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.chip::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
 }

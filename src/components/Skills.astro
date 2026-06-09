@@ -14,30 +14,45 @@ import { skillGroups } from "../data/content";
 
   <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
     {
-      skillGroups.map((group, gi) => (
-        <div class="reveal bg-surface p-7" style={`transition-delay: ${gi * 80}ms;`}>
-          <h3 class="mb-6 text-sm font-semibold uppercase tracking-widest text-muted">
-            {group.label}
-          </h3>
-          <ul class="flex flex-wrap gap-x-5 gap-y-6">
-            {group.items.map((item) => (
-              <li class="group flex flex-col items-center gap-2">
-                <img
-                  src={item.icon}
-                  alt={item.name}
-                  loading="lazy"
-                  width="36"
-                  height="36"
-                  class="h-9 w-9 grayscale transition-all duration-300 group-hover:grayscale-0"
-                />
-                <span class="text-xs text-muted transition-colors group-hover:text-fg">
-                  {item.name}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
+      skillGroups.map((group, gi) => {
+        const iconItems = group.items.filter((it) => !!it.icon);
+        const chipItems = group.items.filter((it) => !it.icon);
+        return (
+          <div class="reveal flex flex-col bg-surface p-6 sm:p-7" style={`transition-delay: ${gi * 80}ms;`}>
+            <h3 class="mb-6 text-sm font-semibold uppercase tracking-widest text-muted">
+              {group.label}
+            </h3>
+
+            {iconItems.length > 0 && (
+              <ul class="flex flex-wrap gap-x-5 gap-y-6">
+                {iconItems.map((item) => (
+                  <li class="group/icon flex flex-col items-center gap-2">
+                    <img
+                      src={item.icon}
+                      alt={item.name}
+                      loading="lazy"
+                      width="36"
+                      height="36"
+                      class="h-9 w-9 grayscale transition-all duration-300 group-hover/icon:grayscale-0"
+                    />
+                    <span class="text-xs text-muted transition-colors group-hover/icon:text-fg">
+                      {item.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {chipItems.length > 0 && (
+              <ul class:list={["mt-6 flex flex-wrap gap-2 pt-5", iconItems.length > 0 && "border-t border-border"]}>
+                {chipItems.map((item) => (
+                  <li><span class="chip">{item.name}</span></li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })
     }
   </div>
 </section>
