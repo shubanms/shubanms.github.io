@@ -12,10 +12,14 @@ const socials = [
 
 <section
   id="top"
-  class="relative flex min-h-[92vh] items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
+  class="relative flex min-h-[88vh] items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
 >
-  <!-- ambient accent glow -->
+  <!-- Subtle grid backdrop -->
+  <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+  <!-- Ambient accent glow that subtly follows cursor -->
   <div
+    id="hero-orb"
     class="blob pointer-events-none absolute -top-40 right-0 h-[34rem] w-[34rem] rounded-full opacity-50 blur-3xl"
     style="background: radial-gradient(circle, var(--accent-soft), transparent 70%);"
     aria-hidden="true"
@@ -23,42 +27,43 @@ const socials = [
   </div>
 
   <div class="relative mx-auto w-full max-w-5xl">
-    <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm font-medium text-muted">
+    <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium text-muted sm:text-sm">
       <span class="relative flex h-2 w-2">
         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
         <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
       </span>
-      {profile.location}
+      Available · {profile.location}
     </p>
 
     <h1
-      class="reveal font-display text-5xl font-bold leading-[1.05] tracking-tight text-fg sm:text-7xl"
+      class="reveal font-display text-[2.75rem] font-bold leading-[1.05] tracking-tight text-fg sm:text-6xl lg:text-7xl"
       style="transition-delay: 60ms;"
     >
       Hi, I'm Shuban.
     </h1>
 
     <p
-      class="reveal mt-5 max-w-2xl font-display text-2xl font-medium text-muted sm:text-3xl"
+      class="reveal mt-4 max-w-2xl font-display text-xl font-medium text-muted sm:mt-5 sm:text-3xl"
       style="transition-delay: 120ms;"
     >
       I'm a&nbsp;<span id="typed" class="caret text-fg"></span>
     </p>
 
     <p
-      class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted"
+      class="reveal mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
       style="transition-delay: 180ms;"
     >
-      I build reliable AI-driven systems and data pipelines — turning ambiguous
-      problems into production software that teams can trust.
+      {profile.bio}
     </p>
 
     <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="transition-delay: 240ms;">
       <a
+        id="cta-primary"
         href="#projects"
-        class="rounded-full bg-fg px-6 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+        class="magnet inline-flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-sm font-semibold text-bg transition-shadow hover:shadow-lg"
       >
         View my work
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
       </a>
       <a
         href={profile.resume}
@@ -75,7 +80,7 @@ const socials = [
         socials.map((s) => (
           <a
             href={s.href}
-            target="_blank"
+            target={s.href.startsWith("mailto:") ? undefined : "_blank"}
             rel="noopener"
             aria-label={s.label}
             class="text-muted transition-colors hover:text-accent"
@@ -91,30 +96,57 @@ const socials = [
 <script>
   import { profile } from "../data/content";
 
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Typewriter
   const el = document.getElementById("typed");
   if (el) {
     const words = profile.roles;
-    let w = 0,
-      c = 0,
-      deleting = false;
+    let w = 0, c = 0, deleting = false;
 
     const tick = () => {
       const word = words[w];
-      el.textContent = deleting
-        ? word.slice(0, c--)
-        : word.slice(0, c++);
-
-      let delay = deleting ? 45 : 90;
+      el.textContent = deleting ? word.slice(0, c--) : word.slice(0, c++);
+      let delay = deleting ? 38 : 80;
       if (!deleting && c === word.length + 1) {
         deleting = true;
-        delay = 1400;
+        delay = 1500;
       } else if (deleting && c === 0) {
         deleting = false;
         w = (w + 1) % words.length;
-        delay = 350;
+        delay = 320;
       }
       setTimeout(tick, delay);
     };
     tick();
+  }
+
+  // Magnetic CTA — subtle pull toward cursor
+  const cta = document.getElementById("cta-primary") as HTMLElement | null;
+  if (cta && !reduce && window.matchMedia("(hover: hover)").matches) {
+    cta.addEventListener("mousemove", (e) => {
+      const rect = cta.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      cta.style.transform = `translate(${dx * 0.18}px, ${dy * 0.18}px)`;
+    });
+    cta.addEventListener("mouseleave", () => {
+      cta.style.transform = "";
+    });
+  }
+
+  // Cursor-tracking accent orb (subtle parallax)
+  const orb = document.getElementById("hero-orb");
+  if (orb && !reduce && window.matchMedia("(hover: hover)").matches) {
+    const hero = orb.parentElement;
+    hero?.addEventListener("mousemove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      orb.style.transform = `translate(${x * -40}px, ${y * -40}px)`;
+    });
+    hero?.addEventListener("mouseleave", () => {
+      orb.style.transform = "";
+    });
   }
 </script>
