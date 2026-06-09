@@ -1,5 +1,3 @@
-// TODO: replace public/assets/Shuban_M_S_Resume.pdf with the updated CV (user will provide).
-
 export const profile = {
   name: "Shuban M S",
   tagline: "AI Engineer & SDE-1",
